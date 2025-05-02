@@ -75,7 +75,7 @@ type DownloadSecretParams struct {
 	DynamicSecretsTTLSec  int
 }
 
-func (dp *doppler) ListSecrets(params ListSecretsParams) (*Secrets, error) {
+func (dp *Doppler) ListSecrets(params ListSecretsParams) (*Secrets, error) {
 	var url strings.Builder
 	url.WriteString("/v3/configs/config/secrets?project=")
 	url.WriteString(params.Project)
@@ -117,7 +117,7 @@ func (dp *doppler) ListSecrets(params ListSecretsParams) (*Secrets, error) {
 }
 
 // List Secret names
-func (dp *doppler) ListSecretNames(params ListSecretNamesParams) (*SecretNames, error) {
+func (dp *Doppler) ListSecretNames(params ListSecretNamesParams) (*SecretNames, error) {
 	var url strings.Builder
 	url.WriteString("/v3/configs/config/secrets/names?project=")
 	url.WriteString(params.Project)
@@ -156,7 +156,7 @@ Retrieves a secret
   - config: Name of the config object
   - name: Name of the secret
 */
-func (dp *doppler) RetrieveSecret(project, config, name string) (*Secret, error) {
+func (dp *Doppler) RetrieveSecret(project, config, name string) (*Secret, error) {
 	request, err := http.NewRequest(
 		http.MethodGet,
 		"/v3/configs/config/secret?project="+project+"&config="+config+"&name="+name,
@@ -179,7 +179,7 @@ func (dp *doppler) RetrieveSecret(project, config, name string) (*Secret, error)
 	return data, nil
 }
 
-func (dp *doppler) DeleteSecret(project, config, name string) (string, error) {
+func (dp *Doppler) DeleteSecret(project, config, name string) (string, error) {
 	request, err := http.NewRequest(
 		http.MethodDelete,
 		"/v3/configs/config/secret?project="+project+"&config="+config+"&name="+name,
@@ -197,7 +197,7 @@ func (dp *doppler) DeleteSecret(project, config, name string) (string, error) {
 	return string(body), nil
 }
 
-func (dp *doppler) UpdateSecret(params UpdateSecretParams) (*Secrets, error) {
+func (dp *Doppler) UpdateSecret(params UpdateSecretParams) (*Secrets, error) {
 	payload, err := json.Marshal(params)
 	if err != nil {
 		return nil, err
@@ -224,7 +224,7 @@ func (dp *doppler) UpdateSecret(params UpdateSecretParams) (*Secrets, error) {
 	return data, nil
 }
 
-func (dp *doppler) DownloadSecret(params DownloadSecretParams) (string, error) {
+func (dp *Doppler) DownloadSecret(params DownloadSecretParams) (string, error) {
 	var url strings.Builder
 	url.WriteString("/v3/configs/config/secrets/download?project=")
 	url.WriteString(params.Project)
@@ -261,7 +261,7 @@ func (dp *doppler) DownloadSecret(params DownloadSecretParams) (string, error) {
 }
 
 // Set a note on a secret
-func (dp *doppler) UpdateNote(params SetNoteParams) (*NoteResponse, error) {
+func (dp *Doppler) UpdateNote(params SetNoteParams) (*NoteResponse, error) {
 	payload, err := json.Marshal(params)
 	if err != nil {
 		return nil, err

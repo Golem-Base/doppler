@@ -38,7 +38,7 @@ type PlainTextResp struct {
 /*
 Generate a Doppler Share link by sending a plain text secret. This endpoint is not end-to-end encrypted as you are sending the secret in plain text. At no point do we store the plain text secret or the password in our systems. The receive flow the user goes through will be end-to-end encrypted where the encrypted secret will be decrypted on the browser.
 */
-func (dp *doppler) SharePlainTextSecret(args PlainTextArgs) (data *PlainTextResp, err error) {
+func (dp *Doppler) SharePlainTextSecret(args PlainTextArgs) (data *PlainTextResp, err error) {
 
 	payload, err := json.Marshal(args)
 	if err != nil {
@@ -70,7 +70,7 @@ type EncryptedSecretArgs struct {
 /*
 Generate a Doppler Share link by sending an encrypted secret. The receive flow the user goes through will be end-to-end encrypted where the encrypted secret will be decrypted on the browser.
 */
-func (dp *doppler) ShareEncryptedSecret(args interface{}) (data interface{}, err error) {
+func (dp *Doppler) ShareEncryptedSecret(args interface{}) (data interface{}, err error) {
 	payload, err := json.Marshal(args)
 	if err != nil {
 		return

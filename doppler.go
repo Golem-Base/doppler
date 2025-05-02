@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-type doppler struct {
+type Doppler struct {
 	client   *http.Client
 	token    token
 	base_url string
@@ -21,7 +21,7 @@ type FailedRequest struct {
 }
 
 // create new doppler config
-func New(key string) (*doppler, error) {
+func New(key string) (*Doppler, error) {
 	apiToken := token{
 		Key: key,
 	}
@@ -30,14 +30,14 @@ func New(key string) (*doppler, error) {
 		return nil, err
 	}
 
-	return &doppler{
+	return &Doppler{
 		client:   &http.Client{},
 		token:    apiToken,
 		base_url: "api.doppler.com",
 	}, nil
 }
 
-func NewFromEnv() (*doppler, error) {
+func NewFromEnv() (*Doppler, error) {
 	apiToken := token{
 		Key: os.Getenv("DOPPLER_KEY"),
 	}
@@ -46,14 +46,14 @@ func NewFromEnv() (*doppler, error) {
 		return nil, err
 	}
 
-	return &doppler{
+	return &Doppler{
 		client:   &http.Client{},
 		token:    apiToken,
 		base_url: "api.doppler.com",
 	}, nil
 }
 
-func (dp *doppler) makeApiRequest(request *http.Request) ([]byte, error) {
+func (dp *Doppler) makeApiRequest(request *http.Request) ([]byte, error) {
 	var (
 		errData     *FailedRequest
 		request_url = &url.URL{

@@ -16,7 +16,7 @@ type IssueLeaseArgs struct {
 /*
 Issue a lease for a dynamic secret
 */
-func (dp *doppler) IssueLease(args IssueLeaseArgs) (data *interface{}, err error) {
+func (dp *Doppler) IssueLease(args IssueLeaseArgs) (data *interface{}, err error) {
 
 	payload, err := json.Marshal(args)
 	if err != nil {
@@ -55,7 +55,7 @@ type RevokeLeaseData struct {
 /*
 Revoke a lease for a dynamic secret
 */
-func (dp *doppler) RevokeLease(args RevokeLeaseArgs) (data *RevokeLeaseData, err error) {
+func (dp *Doppler) RevokeLease(args RevokeLeaseArgs) (data *RevokeLeaseData, err error) {
 	payload, err := json.Marshal(args)
 	if err != nil {
 		return

@@ -18,7 +18,7 @@ type IP struct {
 /*
 List trusted IPs
 */
-func (dp *doppler) ListTrustedIPs(project, config string) (*IPs, error) {
+func (dp *Doppler) ListTrustedIPs(project, config string) (*IPs, error) {
 	request, err := http.NewRequest(
 		http.MethodGet,
 		"/v3/configs/config/trusted_ips?project="+project+"&config="+config,
@@ -44,7 +44,7 @@ func (dp *doppler) ListTrustedIPs(project, config string) (*IPs, error) {
 /*
 Add a trusted IP
 */
-func (dp *doppler) AddIP(project, config, ip string) (*IP, error) {
+func (dp *Doppler) AddIP(project, config, ip string) (*IP, error) {
 	payload := strings.NewReader("{\"ip\":\"" + ip + "\"}")
 	request, err := http.NewRequest(
 		http.MethodPost,
@@ -71,7 +71,7 @@ func (dp *doppler) AddIP(project, config, ip string) (*IP, error) {
 /*
 Delete a trusted IP
 */
-func (dp *doppler) DeleteIP(project, config, ip string) (string, error) {
+func (dp *Doppler) DeleteIP(project, config, ip string) (string, error) {
 	payload := strings.NewReader("{\"ip\":\"" + ip + "\"}")
 	request, err := http.NewRequest(
 		http.MethodDelete,

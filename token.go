@@ -39,7 +39,7 @@ func (t *token) validate() error {
 }
 
 // Revoke auth tokens
-func (dp *doppler) RevokeTokens(params []RevokeTokenParam) error {
+func (dp *Doppler) RevokeTokens(params []RevokeTokenParam) error {
 	payload, err := json.Marshal(params)
 	if err != nil {
 		return err

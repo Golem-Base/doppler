@@ -41,7 +41,7 @@ Get all users of a workplace
 @param settings: bool
 If true, the api will return more information if users have e.g. SAML enabled and/or Multi Factor Auth enabled
 */
-func (dp *doppler) GetWorkplaceUsers(settings bool, page int32) (*WorkplaceUsers, error) {
+func (dp *Doppler) GetWorkplaceUsers(settings bool, page int32) (*WorkplaceUsers, error) {
 	// support only audit tokens
 	if dp.token.Type != "audit" {
 		return nil, errors.New("audit token required")
@@ -75,7 +75,7 @@ Get a specific user in a workplace
 @param settings: bool
 If true, the api will return more information if user has e.g. SAML enabled and/or Multi Factor Auth enabled
 */
-func (dp *doppler) GetWorkplaceUser(user_id string, settings bool) (*WorkplaceUser, error) {
+func (dp *Doppler) GetWorkplaceUser(user_id string, settings bool) (*WorkplaceUser, error) {
 	// support only audit tokens
 	if dp.token.Type != "audit" {
 		return nil, errors.New("audit token required")

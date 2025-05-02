@@ -15,7 +15,7 @@ type ProjectRole struct {
 
 type ProjectRoles struct {
 	ProjectRoles []ProjectRole `json:"roles,omitempty"`
-	Success      bool        `json:"success,omitempty"`
+	Success      bool          `json:"success,omitempty"`
 }
 
 type ProjectPermissions struct {
@@ -28,7 +28,7 @@ type RetrieveProjectResponse struct {
 	Success bool        `json:"success"`
 }
 
-func (dp *doppler) ListProjectRoles() (*ProjectRoles, error) {
+func (dp *Doppler) ListProjectRoles() (*ProjectRoles, error) {
 	request, err := http.NewRequest(
 		http.MethodGet,
 		"/v3/projects/roles",
@@ -52,7 +52,7 @@ func (dp *doppler) ListProjectRoles() (*ProjectRoles, error) {
 	return data, nil
 }
 
-func (dp *doppler) ListProjectPermissions() (*ProjectPermissions, error) {
+func (dp *Doppler) ListProjectPermissions() (*ProjectPermissions, error) {
 	request, err := http.NewRequest(
 		http.MethodGet,
 		"/v3/projects/permissions",
@@ -76,7 +76,7 @@ func (dp *doppler) ListProjectPermissions() (*ProjectPermissions, error) {
 	return data, nil
 }
 
-func (dp *doppler) RetrieveProjectRole(role string) (*RetrieveProjectResponse, error) {
+func (dp *Doppler) RetrieveProjectRole(role string) (*RetrieveProjectResponse, error) {
 	request, err := http.NewRequest(
 		http.MethodGet,
 		"/v3/workplace/roles/role/"+role,
@@ -100,7 +100,7 @@ func (dp *doppler) RetrieveProjectRole(role string) (*RetrieveProjectResponse, e
 	return data, nil
 }
 
-func (dp *doppler) CreateProjectRole(role string) (*RetrieveProjectResponse, error) {
+func (dp *Doppler) CreateProjectRole(role string) (*RetrieveProjectResponse, error) {
 	// TODO: Add payload (missing in docs)
 	request, err := http.NewRequest(
 		http.MethodPost,
@@ -125,7 +125,7 @@ func (dp *doppler) CreateProjectRole(role string) (*RetrieveProjectResponse, err
 	return data, nil
 }
 
-func (dp *doppler) UpdateProjectRole(role string) (*RetrieveProjectResponse, error) {
+func (dp *Doppler) UpdateProjectRole(role string) (*RetrieveProjectResponse, error) {
 	// TODO: Add payload (missing in docs)
 	request, err := http.NewRequest(
 		http.MethodPatch,
@@ -150,7 +150,7 @@ func (dp *doppler) UpdateProjectRole(role string) (*RetrieveProjectResponse, err
 	return data, nil
 }
 
-func (dp *doppler) DeleteProjectRole(role string) (string, error) { // response is empty in docs
+func (dp *Doppler) DeleteProjectRole(role string) (string, error) { // response is empty in docs
 	// TODO: Add payload (missing in docs)
 	request, err := http.NewRequest(
 		http.MethodDelete,

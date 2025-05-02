@@ -31,7 +31,7 @@ type UpdateIntegrationParams struct {
 	Integration string `json:"integration,omitempty"` // The slug of the integration to update
 }
 
-func (dp *doppler) ListIntegrations() (*Integrations, error) {
+func (dp *Doppler) ListIntegrations() (*Integrations, error) {
 	request, err := http.NewRequest(
 		http.MethodGet,
 		"/v3/integrations",
@@ -56,7 +56,7 @@ func (dp *doppler) ListIntegrations() (*Integrations, error) {
 }
 
 // TODO: docs incomplete
-func (dp *doppler) CreateIntegration(integrationType, name string) (*IntegrationData, error) {
+func (dp *Doppler) CreateIntegration(integrationType, name string) (*IntegrationData, error) {
 	request, err := http.NewRequest(
 		http.MethodPost,
 		"/v3/integrations",
@@ -80,7 +80,7 @@ func (dp *doppler) CreateIntegration(integrationType, name string) (*Integration
 	return data, nil
 }
 
-func (dp *doppler) RetrieveIntegration(integrationSlug string) (*IntegrationData, error) {
+func (dp *Doppler) RetrieveIntegration(integrationSlug string) (*IntegrationData, error) {
 	request, err := http.NewRequest(
 		http.MethodGet,
 		"/v3/integrations/integration?integration="+integrationSlug,
@@ -105,7 +105,7 @@ func (dp *doppler) RetrieveIntegration(integrationSlug string) (*IntegrationData
 }
 
 // TODO
-func (dp *doppler) UpdateIntegration(params UpdateIntegrationParams) (string, error) { // no response according to docs
+func (dp *Doppler) UpdateIntegration(params UpdateIntegrationParams) (string, error) { // no response according to docs
 	request, err := http.NewRequest(
 		http.MethodPut,
 		"/v3/integrations/integration?integration="+params.Integration,
@@ -130,7 +130,7 @@ func (dp *doppler) UpdateIntegration(params UpdateIntegrationParams) (string, er
 }
 
 // TODO
-func (dp *doppler) DeleteIntegration(integration string) (string, error) { // not sure, can't test
+func (dp *Doppler) DeleteIntegration(integration string) (string, error) { // not sure, can't test
 	request, err := http.NewRequest(
 		http.MethodDelete,
 		"/v3/integrations/integration?integration="+integration,

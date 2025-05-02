@@ -18,7 +18,7 @@ type Invite struct {
 	WorkplaceRole WorkplaceRole `json:"workplace_role"`
 }
 
-func (dp *doppler) ListInvites(page, limit *int) (*Invites, error) {
+func (dp *Doppler) ListInvites(page, limit *int) (*Invites, error) {
 	defaultLimit := 20
 	defaultPage := 1
 	if page == nil || *page <= 0 {

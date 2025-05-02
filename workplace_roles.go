@@ -17,7 +17,7 @@ type WorkplaceRole struct {
 
 type WorkplaceRoles struct {
 	WorkplaceRoles []WorkplaceRole `json:"roles,omitempty"`
-	Success        bool          `json:"success,omitempty"`
+	Success        bool            `json:"success,omitempty"`
 }
 
 type WorkplacePermissions struct {
@@ -35,7 +35,7 @@ type CreateRoleParams struct {
 	Permissions []string `json:"permissions,omitempty"`
 }
 
-func (dp *doppler) ListWorkplaceRoles() (*WorkplaceRoles, error) {
+func (dp *Doppler) ListWorkplaceRoles() (*WorkplaceRoles, error) {
 	request, err := http.NewRequest(
 		http.MethodGet,
 		"/v3/workplace/roles",
@@ -59,7 +59,7 @@ func (dp *doppler) ListWorkplaceRoles() (*WorkplaceRoles, error) {
 	return data, nil
 }
 
-func (dp *doppler) ListWorkplacePermissions() (*WorkplacePermissions, error) {
+func (dp *Doppler) ListWorkplacePermissions() (*WorkplacePermissions, error) {
 	request, err := http.NewRequest(
 		http.MethodGet,
 		"/v3/workplace/permissions",
@@ -83,7 +83,7 @@ func (dp *doppler) ListWorkplacePermissions() (*WorkplacePermissions, error) {
 	return data, nil
 }
 
-func (dp *doppler) RetrieveWorkplaceRole(role string) (*RetrieveWorkplaceResponse, error) {
+func (dp *Doppler) RetrieveWorkplaceRole(role string) (*RetrieveWorkplaceResponse, error) {
 	request, err := http.NewRequest(
 		http.MethodGet,
 		"/v3/workplace/roles/role/"+role,
@@ -107,7 +107,7 @@ func (dp *doppler) RetrieveWorkplaceRole(role string) (*RetrieveWorkplaceRespons
 	return data, nil
 }
 
-func (dp *doppler) CreateWorkplaceRole(params CreateRoleParams) (*WorkplaceRole, error) {
+func (dp *Doppler) CreateWorkplaceRole(params CreateRoleParams) (*WorkplaceRole, error) {
 	// TODO: Add payload (missing in docs)
 	payload, err := json.Marshal(params)
 	if err != nil {
@@ -136,7 +136,7 @@ func (dp *doppler) CreateWorkplaceRole(params CreateRoleParams) (*WorkplaceRole,
 	return data, nil
 }
 
-func (dp *doppler) UpdateWorkplaceRole(role string) (*WorkplaceRole, error) {
+func (dp *Doppler) UpdateWorkplaceRole(role string) (*WorkplaceRole, error) {
 	// TODO: Add payload (missing in docs)
 	request, err := http.NewRequest(
 		http.MethodPatch,
@@ -161,7 +161,7 @@ func (dp *doppler) UpdateWorkplaceRole(role string) (*WorkplaceRole, error) {
 	return data, nil
 }
 
-func (dp *doppler) DeleteWorkplaceRole(role string) (string, error) {
+func (dp *Doppler) DeleteWorkplaceRole(role string) (string, error) {
 	request, err := http.NewRequest(
 		http.MethodDelete,
 		"/v3/workplace/roles/role/"+role,

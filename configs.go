@@ -56,7 +56,7 @@ Fetch all configs
   - page: page number
   - perPage: Items per page (default: 20)
 */
-func (dp *doppler) ListConfigs(projectName, environmentSlug string, page int, perPage *int) (*Configs, error) {
+func (dp *Doppler) ListConfigs(projectName, environmentSlug string, page int, perPage *int) (*Configs, error) {
 	defaultPerPage := 20
 	if perPage == nil {
 		perPage = &defaultPerPage
@@ -86,7 +86,7 @@ func (dp *doppler) ListConfigs(projectName, environmentSlug string, page int, pe
 /*
 Create a new branch config.
 */
-func (dp *doppler) CreateConfig(params CreateConfigParams) (*IConfig, error) {
+func (dp *Doppler) CreateConfig(params CreateConfigParams) (*IConfig, error) {
 	payload, err := json.Marshal(params)
 	if err != nil {
 		return nil, err
@@ -116,7 +116,7 @@ Fetch a config's details
   - project: Unique identifier for the project
   - config: Name of the config object
 */
-func (dp *doppler) RetrieveConfig(project, config string) (*IConfig, error) {
+func (dp *Doppler) RetrieveConfig(project, config string) (*IConfig, error) {
 	request, err := http.NewRequest(
 		http.MethodGet,
 		"/v3/configs/config?project="+project+"&config="+config,
@@ -142,7 +142,7 @@ func (dp *doppler) RetrieveConfig(project, config string) (*IConfig, error) {
 /*
 Modify an existing config.
 */
-func (dp *doppler) UpdateConfig(params ModifyConfigParams) (*IConfig, error) {
+func (dp *Doppler) UpdateConfig(params ModifyConfigParams) (*IConfig, error) {
 	payload, err := json.Marshal(params)
 	if err != nil {
 		return nil, err
@@ -174,7 +174,7 @@ func (dp *doppler) UpdateConfig(params ModifyConfigParams) (*IConfig, error) {
 /*
 Permanently delete the config.
 */
-func (dp *doppler) DeleteConfig(params DeletConfigParams) (*Success, error) {
+func (dp *Doppler) DeleteConfig(params DeletConfigParams) (*Success, error) {
 	payload, err := json.Marshal(params)
 	if err != nil {
 		return nil, err
@@ -208,7 +208,7 @@ func (dp *doppler) DeleteConfig(params DeletConfigParams) (*Success, error) {
 Create a new branch config by cloning another.
 This duplicates a branch config and all its secrets.
 */
-func (dp *doppler) CloneConfig(params ModifyConfigParams) (*IConfig, error) {
+func (dp *Doppler) CloneConfig(params ModifyConfigParams) (*IConfig, error) {
 	payload, err := json.Marshal(params)
 	if err != nil {
 		return nil, err
@@ -239,7 +239,7 @@ func (dp *doppler) CloneConfig(params ModifyConfigParams) (*IConfig, error) {
 /*
 Prevent the config from being renamed or deleted.
 */
-func (dp *doppler) LockConfig(params DeletConfigParams) (*IConfig, error) {
+func (dp *Doppler) LockConfig(params DeletConfigParams) (*IConfig, error) {
 	payload, err := json.Marshal(params)
 	if err != nil {
 		return nil, err
@@ -270,7 +270,7 @@ func (dp *doppler) LockConfig(params DeletConfigParams) (*IConfig, error) {
 /*
 Allow the config to be renamed and/or deleted.
 */
-func (dp *doppler) UnlockConfig(params DeletConfigParams) (*IConfig, error) {
+func (dp *Doppler) UnlockConfig(params DeletConfigParams) (*IConfig, error) {
 	payload, err := json.Marshal(params)
 	if err != nil {
 		return nil, err

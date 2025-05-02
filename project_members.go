@@ -41,7 +41,7 @@ type ProjectMemberResp struct {
 /*
 List All Project Members
 */
-func (dp *doppler) ListProjectMembers(project_id string, page, per_page int32) (*ProjectMembersResp, error) {
+func (dp *Doppler) ListProjectMembers(project_id string, page, per_page int32) (*ProjectMembersResp, error) {
 
 	req, err := http.NewRequest(
 		http.MethodGet,
@@ -66,7 +66,7 @@ func (dp *doppler) ListProjectMembers(project_id string, page, per_page int32) (
 }
 
 /*Retrieve Project Member*/
-func (dp *doppler) RetrieveProjectMember(membertype MemberType, slug, project_id string) (*Member, error) {
+func (dp *Doppler) RetrieveProjectMember(membertype MemberType, slug, project_id string) (*Member, error) {
 	req, err := http.NewRequest(
 		http.MethodGet,
 		fmt.Sprintf("/v3/projects/project/members/member/%s/%s?project=%s", membertype.String(), slug, project_id),
@@ -97,7 +97,7 @@ type AddProjectMemberParam struct {
 }
 
 /*Add Project Member*/
-func (dp *doppler) AddProjectMember(project_id string, args AddProjectMemberParam) (*Member, error) {
+func (dp *Doppler) AddProjectMember(project_id string, args AddProjectMemberParam) (*Member, error) {
 	payload, err := json.Marshal(args)
 	if err != nil {
 		return nil, err
@@ -131,7 +131,7 @@ type UpdateProjectMemberParams struct {
 }
 
 /*Update Project Member*/
-func (dp *doppler) UpdateProjectMember(project_id, member_slug string, member_type MemberType, args UpdateProjectMemberParams) (*Member, error) {
+func (dp *Doppler) UpdateProjectMember(project_id, member_slug string, member_type MemberType, args UpdateProjectMemberParams) (*Member, error) {
 	payload, err := json.Marshal(args)
 	if err != nil {
 		return nil, err
@@ -160,7 +160,7 @@ func (dp *doppler) UpdateProjectMember(project_id, member_slug string, member_ty
 }
 
 /*Remove Project Member*/
-func (dp *doppler) RemoveProjectMember(member_type MemberType, member_slug, project_id string) error {
+func (dp *Doppler) RemoveProjectMember(member_type MemberType, member_slug, project_id string) error {
 	req, err := http.NewRequest(
 		http.MethodDelete,
 		fmt.Sprintf("/v3/projects/project/members/member/%s/%s?project=%s", member_type.String(), member_slug, project_id),

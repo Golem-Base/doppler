@@ -44,7 +44,7 @@ type DeleteTokenParams struct {
 	Slug    string `json:"slug,omitempty"`    // The slug of the service token.
 }
 
-func (dp *doppler) ListServiceTokens(project, config string) (*ServiceTokens, error) {
+func (dp *Doppler) ListServiceTokens(project, config string) (*ServiceTokens, error) {
 	request, err := http.NewRequest(
 		http.MethodGet,
 		"/v3/configs/config/tokens?project="+project+"&config="+config,
@@ -68,7 +68,7 @@ func (dp *doppler) ListServiceTokens(project, config string) (*ServiceTokens, er
 	return data, nil
 }
 
-func (dp *doppler) CreateServiceToken(params CreateTokenParams) (*ServiceTokenModel, error) {
+func (dp *Doppler) CreateServiceToken(params CreateTokenParams) (*ServiceTokenModel, error) {
 	if params.Access != "read" && params.Access != "read/write" {
 		params.Access = "read"
 	}
@@ -100,7 +100,7 @@ func (dp *doppler) CreateServiceToken(params CreateTokenParams) (*ServiceTokenMo
 
 }
 
-func (dp *doppler) DeleteServiceToken(params DeleteTokenParams) (*Success, error) {
+func (dp *Doppler) DeleteServiceToken(params DeleteTokenParams) (*Success, error) {
 	payload, err := json.Marshal(params)
 	if err != nil {
 		return nil, err

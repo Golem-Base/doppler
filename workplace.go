@@ -23,7 +23,7 @@ type WorkplaceParams struct {
 }
 
 // get workplace info
-func (dp *doppler) GetWorkplace() (*Workplace, error) {
+func (dp *Doppler) GetWorkplace() (*Workplace, error) {
 	var (
 		request, err = http.NewRequest(
 			http.MethodGet,
@@ -50,7 +50,7 @@ func (dp *doppler) GetWorkplace() (*Workplace, error) {
 }
 
 // update work place info
-func (dp *doppler) UpdateWorkplace(params WorkplaceParams) (*Workplace, error) {
+func (dp *Doppler) UpdateWorkplace(params WorkplaceParams) (*Workplace, error) {
 	payload, err := json.Marshal(params)
 	if err != nil {
 		return nil, err
