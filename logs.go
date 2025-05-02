@@ -44,7 +44,7 @@ type User struct {
 }
 
 // list activity logs
-func (dp *doppler) RetrieveLogs(page int, limit *int) (*ActivityLogs, error) {
+func (dp *Doppler) RetrieveLogs(page int, limit *int) (*ActivityLogs, error) {
 	var (
 		default_per_page int = 20
 		data             ActivityLogs
@@ -76,7 +76,7 @@ func (dp *doppler) RetrieveLogs(page int, limit *int) (*ActivityLogs, error) {
 }
 
 // get activity log
-func (dp *doppler) RetrieveLog(log_id string) (*ActivityLog, error) {
+func (dp *Doppler) RetrieveLog(log_id string) (*ActivityLog, error) {
 	var (
 		request, err = http.NewRequest(
 			http.MethodGet,

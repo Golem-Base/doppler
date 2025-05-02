@@ -16,7 +16,7 @@ type Group struct {
 
 type Groups struct {
 	Groups  []Group `json:"groups,omitempty"`
-	Success bool  `json:"success,omitempty"`
+	Success bool    `json:"success,omitempty"`
 }
 
 type GroupBodyParams struct {
@@ -39,7 +39,7 @@ type MemberBodyParams struct {
 	Slug string `json:"slug,omitempty"` // The member's slug
 }
 
-func (dp *doppler) ListGroups(page, limit *int) (*Groups, error) {
+func (dp *Doppler) ListGroups(page, limit *int) (*Groups, error) {
 	defaultLimit := 20
 	defaultPage := 1
 	if page == nil || *page <= 0 {
@@ -71,7 +71,7 @@ func (dp *doppler) ListGroups(page, limit *int) (*Groups, error) {
 	return data, nil
 }
 
-func (dp *doppler) RetrieveGroup(slug string) (*GroupData, error) {
+func (dp *Doppler) RetrieveGroup(slug string) (*GroupData, error) {
 	request, err := http.NewRequest(
 		http.MethodGet,
 		"/v3/workplace/groups/group/"+slug,
@@ -95,7 +95,7 @@ func (dp *doppler) RetrieveGroup(slug string) (*GroupData, error) {
 	return data, nil
 }
 
-func (dp *doppler) CreateGroup(params GroupBodyParams) (*GroupData, error) {
+func (dp *Doppler) CreateGroup(params GroupBodyParams) (*GroupData, error) {
 	payload, err := json.Marshal(params)
 	if err != nil {
 		return nil, err
@@ -123,7 +123,7 @@ func (dp *doppler) CreateGroup(params GroupBodyParams) (*GroupData, error) {
 	return data, nil
 }
 
-func (dp *doppler) UpdateGroup(slug string, params GroupBodyParams) (*GroupData, error) {
+func (dp *Doppler) UpdateGroup(slug string, params GroupBodyParams) (*GroupData, error) {
 	payload, err := json.Marshal(params)
 	if err != nil {
 		return nil, err
@@ -151,7 +151,7 @@ func (dp *doppler) UpdateGroup(slug string, params GroupBodyParams) (*GroupData,
 	return data, nil
 }
 
-func (dp *doppler) DeleteGroup(slug string) (string, error) {
+func (dp *Doppler) DeleteGroup(slug string) (string, error) {
 	request, err := http.NewRequest(
 		http.MethodDelete,
 		"/v3/workplace/groups/group/"+slug,
@@ -170,7 +170,7 @@ func (dp *doppler) DeleteGroup(slug string) (string, error) {
 }
 
 // TODO: docs incomplete
-func (dp *doppler) AddMember(slug string, params MemberBodyParams) (string, error) {
+func (dp *Doppler) AddMember(slug string, params MemberBodyParams) (string, error) {
 	params.Type = "workplace_user"
 	payload, err := json.Marshal(params)
 	if err != nil {
@@ -193,7 +193,7 @@ func (dp *doppler) AddMember(slug string, params MemberBodyParams) (string, erro
 	return string(body), nil
 }
 
-func (dp *doppler) DeleteMember(slug, memberSlug, memberType string) (string, error) {
+func (dp *Doppler) DeleteMember(slug, memberSlug, memberType string) (string, error) {
 	request, err := http.NewRequest(
 		http.MethodDelete,
 		"/v3/workplace/groups/group/"+slug+"/members/"+memberType+"/"+memberSlug,

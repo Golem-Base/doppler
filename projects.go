@@ -43,7 +43,7 @@ type UpdateProjectParams struct {
 }
 
 // list projects
-func (dp *doppler) ListProjects(page int, limit *int) (*Projects, error) {
+func (dp *Doppler) ListProjects(page int, limit *int) (*Projects, error) {
 	default_per_page := 20
 
 	if limit == nil {
@@ -72,7 +72,7 @@ func (dp *doppler) ListProjects(page int, limit *int) (*Projects, error) {
 }
 
 // create new project
-func (dp *doppler) CreateProject(params CreateProjectParams) (*IProject, error) {
+func (dp *Doppler) CreateProject(params CreateProjectParams) (*IProject, error) {
 	payload, err := json.Marshal(params)
 	if err != nil {
 		return nil, err
@@ -99,7 +99,7 @@ func (dp *doppler) CreateProject(params CreateProjectParams) (*IProject, error) 
 }
 
 // retrieve project
-func (dp *doppler) RetrieveProject(id string) (*IProject, error) {
+func (dp *Doppler) RetrieveProject(id string) (*IProject, error) {
 	var data IProject
 	req, _ := http.NewRequest(
 		http.MethodGet,
@@ -121,7 +121,7 @@ func (dp *doppler) RetrieveProject(id string) (*IProject, error) {
 }
 
 // update project
-func (dp *doppler) UpdateProject(params UpdateProjectParams) (*IProject, error) {
+func (dp *Doppler) UpdateProject(params UpdateProjectParams) (*IProject, error) {
 
 	payload, err := json.Marshal(params)
 	if err != nil {
@@ -149,7 +149,7 @@ func (dp *doppler) UpdateProject(params UpdateProjectParams) (*IProject, error) 
 }
 
 // delete project
-func (dp *doppler) DeleteProject(project_id string) (*Success, error) {
+func (dp *Doppler) DeleteProject(project_id string) (*Success, error) {
 	req, _ := http.NewRequest(
 		http.MethodDelete,
 		"/v3/projects/project",

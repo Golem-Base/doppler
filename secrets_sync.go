@@ -33,7 +33,7 @@ type SyncBodyParams struct {
 }
 
 // Create a new secrets sync.
-func (dp *doppler) CreateSync(queryParams SyncQueryParams, bodyParams SyncBodyParams) (*SyncData, error) {
+func (dp *Doppler) CreateSync(queryParams SyncQueryParams, bodyParams SyncBodyParams) (*SyncData, error) {
 	if bodyParams.ImportOption == "" {
 		bodyParams.ImportOption = "none"
 	}
@@ -61,7 +61,7 @@ func (dp *doppler) CreateSync(queryParams SyncQueryParams, bodyParams SyncBodyPa
 }
 
 // Retrieve an existing secrets sync.
-func (dp *doppler) RetrieveSync(params SyncQueryParams) (*SyncData, error) {
+func (dp *Doppler) RetrieveSync(params SyncQueryParams) (*SyncData, error) {
 	request, err := http.NewRequest(
 		http.MethodGet,
 		"/v3/configs/config/syncs/sync?project="+params.Project+"&config="+params.Config+"&sync="+params.Sync,
@@ -87,7 +87,7 @@ func (dp *doppler) RetrieveSync(params SyncQueryParams) (*SyncData, error) {
 }
 
 // Delete an existing sync.
-func (dp *doppler) DeleteSync(params SyncQueryParams) (string, error) {
+func (dp *Doppler) DeleteSync(params SyncQueryParams) (string, error) {
 	request, err := http.NewRequest(
 		http.MethodDelete,
 		"/v3/configs/config/syncs/sync?project="+params.Project+"&config="+params.Config+"&sync="+params.Sync+"&delete_from_target="+strconv.FormatBool(params.DeleteFromTarget),

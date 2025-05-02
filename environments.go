@@ -35,7 +35,7 @@ List environments
 
   - projectName: The project's name
 */
-func (dp *doppler) ListEnvironments(projectName string) (*Environments, error) {
+func (dp *Doppler) ListEnvironments(projectName string) (*Environments, error) {
 
 	request, err := http.NewRequest(
 		http.MethodGet,
@@ -64,7 +64,7 @@ Retrieve environment
   - projectName: The project's name
   - environmentSlug: The environment's slug
 */
-func (dp *doppler) RetrieveEnvironment(projectName string, environmentSlug string) (*IEnvironment, error) {
+func (dp *Doppler) RetrieveEnvironment(projectName string, environmentSlug string) (*IEnvironment, error) {
 	request, err := http.NewRequest(
 		http.MethodGet,
 		"/v3/environments/environment/?project="+projectName+"&environment="+environmentSlug,
@@ -92,7 +92,7 @@ Create Environment
   - projectName: The project's name
   - params: Request Body parameters
 */
-func (dp *doppler) CreateEnvironment(projectName string, params EnvironmentBodyParams) (*IEnvironment, error) {
+func (dp *Doppler) CreateEnvironment(projectName string, params EnvironmentBodyParams) (*IEnvironment, error) {
 	payload, err := json.Marshal(params)
 	if err != nil {
 		return nil, err
@@ -125,7 +125,7 @@ Delete Environment
   - projectName: The project's name
   - environmentSlug: The environment's slug
 */
-func (dp *doppler) DeleteEnvironment(projectName string, environmentSlug string) (*Success, error) {
+func (dp *Doppler) DeleteEnvironment(projectName string, environmentSlug string) (*Success, error) {
 	request, err := http.NewRequest(
 		http.MethodDelete,
 		"/v3/environments/environment?project="+projectName+"&environment="+environmentSlug,
@@ -156,7 +156,7 @@ Rename Environment
   - environmentSlug: The environment's slug
   - params: Request Body parameters
 */
-func (dp *doppler) RenameEnvironment(projectName string, environmentSlug string, params EnvironmentBodyParams) (*IEnvironment, error) {
+func (dp *Doppler) RenameEnvironment(projectName string, environmentSlug string, params EnvironmentBodyParams) (*IEnvironment, error) {
 	payload, err := json.Marshal(params)
 	if err != nil {
 		return nil, err

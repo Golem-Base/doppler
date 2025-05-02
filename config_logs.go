@@ -50,7 +50,7 @@ List config logs
   - page: page number
   - perPage: Items per page (default: 20)
 */
-func (dp *doppler) ListConfigLogs(projectName, config string, page int, perPage *int) (*ConfigLogs, error) {
+func (dp *Doppler) ListConfigLogs(projectName, config string, page int, perPage *int) (*ConfigLogs, error) {
 	defaultPerPage := 20
 	if perPage == nil {
 		perPage = &defaultPerPage
@@ -84,7 +84,7 @@ Fetch a config log's details
   - config: Name of the config object
   - logID: Unique identifier for the log object
 */
-func (dp *doppler) RetrieveConfigLog(project, config, logID string) (*IConfigLog, error) {
+func (dp *Doppler) RetrieveConfigLog(project, config, logID string) (*IConfigLog, error) {
 	request, err := http.NewRequest(
 		http.MethodGet,
 		"/v3/configs/config/logs/log?project="+project+"&config="+config+"&log="+logID,
@@ -112,7 +112,7 @@ func (dp *doppler) RetrieveConfigLog(project, config, logID string) (*IConfigLog
 - config: Name of the config object
 - logID: Unique identifier for the log object
 */
-func (dp *doppler) RollbackConfigLog(project, config, logID string) (*IConfigLog, error) {
+func (dp *Doppler) RollbackConfigLog(project, config, logID string) (*IConfigLog, error) {
 	request, _ := http.NewRequest(
 		http.MethodPost,
 		"/v3/configs/config/logs/log/rollback?project="+project+"&config="+config+"&log="+logID,

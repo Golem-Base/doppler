@@ -35,7 +35,7 @@ type WorkplaceRoleObject struct {
 	Permissions []string `json:"permissions,omitempty"` // Workplace permissions to grant
 }
 
-func (dp *doppler) ListServiceAccounts(page, limit *int) (*ServiceAccounts, error) {
+func (dp *Doppler) ListServiceAccounts(page, limit *int) (*ServiceAccounts, error) {
 	defaultLimit := 20
 	defaultPage := 1
 	if page == nil || *page <= 0 {
@@ -66,7 +66,7 @@ func (dp *doppler) ListServiceAccounts(page, limit *int) (*ServiceAccounts, erro
 	return data, nil
 }
 
-func (dp *doppler) RetrieveServiceAccount(slug string) (*ServiceAccountModel, error) {
+func (dp *Doppler) RetrieveServiceAccount(slug string) (*ServiceAccountModel, error) {
 	request, err := http.NewRequest(
 		http.MethodGet,
 		"/v3/workplace/service_accounts/service_account/"+slug,
@@ -90,7 +90,7 @@ func (dp *doppler) RetrieveServiceAccount(slug string) (*ServiceAccountModel, er
 	return data, nil
 }
 
-func (dp *doppler) CreateServiceAccount(params ServiceAccountBodyParams) (*ServiceAccountModel, error) {
+func (dp *Doppler) CreateServiceAccount(params ServiceAccountBodyParams) (*ServiceAccountModel, error) {
 	if params.WorkplaceRole.Identifier != "" && params.WorkplaceRole.Permissions != nil {
 		return nil, errors.New("you may provide an identifier OR permissions, but not both")
 	}
@@ -121,7 +121,7 @@ func (dp *doppler) CreateServiceAccount(params ServiceAccountBodyParams) (*Servi
 	return data, nil
 }
 
-func (dp *doppler) UpdateServiceAccount(slug string, params ServiceAccountBodyParams) (*ServiceAccountModel, error) {
+func (dp *Doppler) UpdateServiceAccount(slug string, params ServiceAccountBodyParams) (*ServiceAccountModel, error) {
 	if params.WorkplaceRole.Identifier != "" && params.WorkplaceRole.Permissions != nil {
 		return nil, errors.New("you may provide an identifier OR permissions, but not both")
 	}
@@ -152,7 +152,7 @@ func (dp *doppler) UpdateServiceAccount(slug string, params ServiceAccountBodyPa
 	return data, nil
 }
 
-func (dp *doppler) DeleteServiceAccount(slug string) (string, error) {
+func (dp *Doppler) DeleteServiceAccount(slug string) (string, error) {
 
 	request, err := http.NewRequest(
 		http.MethodDelete,
