@@ -203,7 +203,7 @@ func (dp *Doppler) UpdateSecret(params UpdateSecretParams) (*Secrets, error) {
 		return nil, err
 	}
 	request, err := http.NewRequest(
-		http.MethodGet,
+		http.MethodPost,
 		"/v3/configs/config/secrets",
 		bytes.NewReader(payload),
 	)
